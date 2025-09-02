@@ -1,12 +1,14 @@
 package org.example.matrixspring.controller;
 
-import org.example.matrixspring.dao.DepartmentEntity;
+import lombok.extern.slf4j.Slf4j;
+import org.example.matrixspring.model.DepartmentDto;
 import org.example.matrixspring.service.DepartmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/departments")
 public class DepartmentController {
@@ -17,25 +19,26 @@ public class DepartmentController {
     }
 
     @GetMapping
-    public List<DepartmentEntity> getDepartments() {
+    public List<DepartmentDto> getDepartments() {
         return departmentService.getDepartments();
     }
 
     @GetMapping("/{departmentId}")
-    public DepartmentEntity getDepartment(@PathVariable Long departmentId) {
+    public DepartmentDto getDepartment(@PathVariable Long departmentId) {
+        log.info("GET request for department with id: {}", departmentId);
         return departmentService.getDepartment(departmentId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addOrder(@RequestBody DepartmentEntity departmentEntity) {
-        departmentService.addDepartment(departmentEntity);
+    public void addDepartment(@RequestBody DepartmentDto departmentDto) {
+        departmentService.addDepartment(departmentDto);
     }
 
     @PutMapping("/{departmentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void editOrder(@RequestBody DepartmentEntity departmentEntity, @PathVariable Long departmentId) {
-        departmentService.editDepartment(departmentEntity, departmentId);
+    public void editDepartment(@RequestBody DepartmentDto departmentDto, @PathVariable Long departmentId) {
+        departmentService.editDepartment(departmentDto, departmentId);
     }
 
     @DeleteMapping("/{departmentId}")

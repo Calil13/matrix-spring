@@ -1,35 +1,50 @@
 package org.example.matrixspring.service;
 
-import org.example.matrixspring.dao.DepartmentEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.example.matrixspring.dao.DepartmentRepository;
+import org.example.matrixspring.model.DepartmentDto;
+import org.example.matrixspring.mapper.DepartmentMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class DepartmentService {
 
     private final DepartmentRepository departmentRepository;
+    private final DepartmentMapper departmentMapper;
 
-    public DepartmentService(DepartmentRepository departmentRepository) {
+    public DepartmentService(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
         this.departmentRepository = departmentRepository;
+        this.departmentMapper = departmentMapper;
     }
 
-    public List<DepartmentEntity> getDepartments() {
-        return departmentRepository.findAll();
+    public List<DepartmentDto> getDepartments() {
+        return departmentRepository.findAll()
+                .stream()
+                .map(departmentMapper::toDto)
+                .collect(Collectors.toList());
     }
 
-    public DepartmentEntity getDepartment(Long departmentId) {
-        return departmentRepository.findById(departmentId).orElseThrow();
+    public DepartmentDto getDepartment(Long departmentId) {
+        log.debug("Searching for department with id {}", departmentId);
+        return departmentRepository.findById(departmentId)
+                .map(departmentMapper::toDto)
+                .orElseThrow(() -> {
+                    log.error("Department with id {} not found", departmentId);
+                    return new RuntimeException("Department not found");
+                });
     }
 
-    public void addDepartment(DepartmentEntity departmentEntity) {
-        departmentRepository.save(departmentEntity);
+    public void addDepartment(DepartmentDto dto) {
+        departmentRepository.save(departmentMapper.toEntity(dto));
     }
 
-    public void editDepartment(DepartmentEntity departmentEntity, Long departmentId) {
+    public void editDepartment(DepartmentDto dto, Long departmentId) {
         var department = departmentRepository.findById(departmentId).orElseThrow();
-        department.setDepartmentName(department.getDepartmentName());
+        department.setDepartmentName(dto.getDepartmentName());
         departmentRepository.save(department);
     }
 
