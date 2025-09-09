@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
 @RestController
 @RequestMapping("/departments")
 public class DepartmentController {
@@ -25,7 +24,6 @@ public class DepartmentController {
 
     @GetMapping("/{departmentId}")
     public DepartmentDto getDepartment(@PathVariable Long departmentId) {
-        log.info("GET request for department with id: {}", departmentId);
         return departmentService.getDepartment(departmentId);
     }
 

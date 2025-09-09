@@ -1,6 +1,7 @@
 package org.example.matrixspring.model;
 
 import lombok.*;
+import org.example.matrixspring.enums.DepartmentStatus;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -8,4 +9,5 @@ import lombok.*;
 public class DepartmentDto {
     private Long id;
     private String departmentName;
+    private DepartmentStatus departmentStatus;
 }

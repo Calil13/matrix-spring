@@ -1,11 +1,8 @@
 package org.example.matrixspring.dao;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.example.matrixspring.enums.DepartmentStatus;
 
 import java.util.Objects;
 
@@ -17,20 +14,26 @@ import java.util.Objects;
 @Setter
 @ToString
 public class DepartmentEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long department_id;
+    private Long departmentId;
+
     private String departmentName;
+
+    @Enumerated(EnumType.STRING)
+    private DepartmentStatus departmentStatus;
+
 
     @Override
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()) return false;
         DepartmentEntity that = (DepartmentEntity) object;
-        return Objects.equals(department_id, that.department_id);
+        return Objects.equals(departmentId, that.departmentId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(department_id);
+        return Objects.hashCode(departmentId);
     }
 }
