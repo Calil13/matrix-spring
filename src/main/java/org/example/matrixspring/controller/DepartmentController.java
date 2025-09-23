@@ -3,7 +3,10 @@ package org.example.matrixspring.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.example.matrixspring.model.DepartmentDto;
 import org.example.matrixspring.service.DepartmentService;
+import org.example.matrixspring.validation.OnCreate;
+import org.example.matrixspring.validation.OnUpdate;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,13 +32,13 @@ public class DepartmentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addDepartment(@RequestBody DepartmentDto departmentDto) {
+    public void addDepartment(@RequestBody @Validated(OnCreate.class) DepartmentDto departmentDto) {
         departmentService.addDepartment(departmentDto);
     }
 
     @PutMapping("/{departmentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void editDepartment(@RequestBody DepartmentDto departmentDto, @PathVariable Long departmentId) {
+    public void editDepartment(@Validated(OnUpdate.class) @RequestBody DepartmentDto departmentDto, @PathVariable Long departmentId) {
         departmentService.editDepartment(departmentDto, departmentId);
     }
 
