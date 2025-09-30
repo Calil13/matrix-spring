@@ -1,7 +1,7 @@
 package org.example.matrixspring.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.matrixspring.dao.DepartmentRepository;
+import org.example.matrixspring.dao.repository.DepartmentRepository;
 import org.example.matrixspring.model.DepartmentDto;
 import org.example.matrixspring.mapper.DepartmentMapper;
 import org.springframework.stereotype.Service;

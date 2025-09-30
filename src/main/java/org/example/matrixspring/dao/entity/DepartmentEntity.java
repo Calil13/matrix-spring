@@ -1,4 +1,4 @@
-package org.example.matrixspring.dao;
+package org.example.matrixspring.dao.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
