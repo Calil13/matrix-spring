@@ -24,6 +24,10 @@ public class DepartmentEntity {
     @Enumerated(EnumType.STRING)
     private DepartmentStatus departmentStatus;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private AddressEntity address;
+
 
     @Override
     public boolean equals(Object object) {
