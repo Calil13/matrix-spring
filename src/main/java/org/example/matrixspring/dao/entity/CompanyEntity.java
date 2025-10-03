@@ -1,9 +1,15 @@
 package org.example.matrixspring.dao.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "company", schema = "public")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class CompanyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

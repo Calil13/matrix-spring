@@ -28,6 +28,10 @@ public class DepartmentEntity {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private AddressEntity address;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private CompanyEntity company;
+
 
     @Override
     public boolean equals(Object object) {

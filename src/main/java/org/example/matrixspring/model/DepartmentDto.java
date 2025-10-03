@@ -3,6 +3,7 @@ package org.example.matrixspring.model;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.example.matrixspring.dao.entity.CompanyEntity;
 import org.example.matrixspring.enums.DepartmentStatus;
 import org.example.matrixspring.validation.OnCreate;
 import org.example.matrixspring.validation.OnUpdate;
@@ -19,4 +20,5 @@ public class DepartmentDto {
     @FutureOrPresent
     private LocalDate createAt;
     private AddressDto address;
+    private CompanyDto company;
 }
