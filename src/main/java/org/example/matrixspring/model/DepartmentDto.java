@@ -18,4 +18,5 @@ public class DepartmentDto {
     private DepartmentStatus departmentStatus;
     @FutureOrPresent
     private LocalDate createAt;
+    private AddressDto address;
 }
