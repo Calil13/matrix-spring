@@ -4,7 +4,7 @@ import org.example.matrixspring.dao.entity.DepartmentEntity;
 import org.example.matrixspring.model.DepartmentDto;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CompanyMapper.class})
 public interface DepartmentMapper {
 
     DepartmentDto toDto(DepartmentEntity entity);
