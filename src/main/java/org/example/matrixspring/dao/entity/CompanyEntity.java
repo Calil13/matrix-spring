@@ -19,11 +19,6 @@ public class CompanyEntity {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "employee_company",
-            joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id")
-    )
-    private Set<EmployeeEntity> employees;
+    @ManyToMany(mappedBy = "company")
+    private Set<EmployeeEntity> employee;
 }

@@ -14,11 +14,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 public class DepartmentDto {
-    @NotBlank(groups = {OnCreate.class, OnUpdate.class})
     private String departmentName;
     private DepartmentStatus departmentStatus;
-    @FutureOrPresent
-    private LocalDate createAt;
     private AddressDto address;
     private CompanyDto company;
 }

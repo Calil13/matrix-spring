@@ -13,8 +13,6 @@ import org.example.matrixspring.dao.entity.DepartmentEntity;
 @AllArgsConstructor
 @Data
 public class AddressDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String city;
     private String street;

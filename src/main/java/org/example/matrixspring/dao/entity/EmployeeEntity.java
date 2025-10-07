@@ -1,34 +1,32 @@
 package org.example.matrixspring.dao.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employee", schema = "public")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString
 public class EmployeeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String email;
     private String firstName;
     private String lastName;
-
-    @Column(unique = true, nullable = false)
-    private String email;
-
     private String position;
-    private Double salary;
-    private LocalDate hireDate;
+    private Integer salary;
 
-    @ManyToMany(mappedBy = "employees")
-    private Set<CompanyEntity> companies;
+    @ManyToMany
+    @JoinTable(
+            name = "employee_company",
+            joinColumns = @JoinColumn(name = "employee"),
+            inverseJoinColumns = @JoinColumn(name = "company")
+    )
+    private Set<CompanyEntity> company;
 }
