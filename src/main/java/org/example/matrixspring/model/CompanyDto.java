@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.matrixspring.dao.entity.EmployeeEntity;
 
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -13,5 +14,5 @@ import java.util.Set;
 public class CompanyDto {
     private Long id;
     private String name;
-    private Set<EmployeeDto> employee;
+    private List<EmployeeDto> employee;
 }

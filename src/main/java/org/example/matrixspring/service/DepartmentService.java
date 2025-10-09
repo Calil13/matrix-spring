@@ -22,7 +22,8 @@ public class DepartmentService {
     }
 
     public List<DepartmentDto> getDepartments() {
-        return departmentRepository.findAll()
+        var departments = departmentRepository.findAll();
+        return departments
                 .stream()
                 .map(departmentMapper::toDto)
                 .collect(Collectors.toList());

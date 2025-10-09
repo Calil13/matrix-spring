@@ -19,6 +19,11 @@ public class CompanyEntity {
 
     private String name;
 
-    @ManyToMany(mappedBy = "company")
+    @ManyToMany
+    @JoinTable(
+            name = "company_employee",
+            joinColumns = @JoinColumn(name = "company_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
     private Set<EmployeeEntity> employee;
 }

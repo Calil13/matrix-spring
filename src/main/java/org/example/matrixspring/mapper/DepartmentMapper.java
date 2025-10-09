@@ -9,8 +9,6 @@ import org.mapstruct.Mapping;
 public interface DepartmentMapper {
 
     DepartmentDto toDto(DepartmentEntity entity);
-
-    @Mapping(target = "departmentId", ignore = true)
     DepartmentEntity toEntity(DepartmentDto dto);
 }
 

@@ -19,6 +19,7 @@ public class ErrorHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ExceptionDto handler(Exception exception) {
+        exception.printStackTrace();
         log.error("ActioLog.handler.error message {}", exception.getMessage());
         return new ExceptionDto("UNEXPECTED_ERROR");
     }

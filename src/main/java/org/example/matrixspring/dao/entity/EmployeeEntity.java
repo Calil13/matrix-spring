@@ -3,6 +3,7 @@ package org.example.matrixspring.dao.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,11 +23,6 @@ public class EmployeeEntity {
     private String position;
     private Integer salary;
 
-    @ManyToMany
-    @JoinTable(
-            name = "employee_company",
-            joinColumns = @JoinColumn(name = "employee"),
-            inverseJoinColumns = @JoinColumn(name = "company")
-    )
-    private Set<CompanyEntity> company;
+    @ManyToMany(mappedBy = "employee")
+    private List<CompanyEntity> companies;
 }
