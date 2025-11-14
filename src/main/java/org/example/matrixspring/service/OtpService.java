@@ -21,7 +21,7 @@ public class OtpService {
     @Value("${otp.expire.minutes:1}")
     private long otpExpireMinutes;
 
-    public String generateOtp(String email) {
+    public void generateOtp(String email) {
 
         String code = String.valueOf((int)(Math.random() * 900000) + 100000);
 
@@ -33,19 +33,22 @@ public class OtpService {
 
         sendOtpEmail(email, code);
 
-        return code;
     }
 
-    public boolean isValidOtp(String code) {
-        Optional<OTP> otpOptional = otpRepository.findByCode(code);
-        if (otpOptional.isEmpty()) return false;
+    public void validateOtp(String otpCode) {
+        if (otpCode == null) {
+            throw new IllegalArgumentException("OTP header is missing");
+        }
+
+        Optional<OTP> otpOptional = otpRepository.findByCode(otpCode);
+        if (otpOptional.isEmpty()) {
+            throw new IllegalArgumentException("Invalid OTP");
+        }
 
         OTP otp = otpOptional.get();
         if (otp.getExpiryTime().isBefore(LocalDateTime.now())) {
-            return false;
+            throw new IllegalArgumentException("OTP has expired");
         }
-
-        return true;
     }
 
     private void sendOtpEmail(String toEmail, String code) {

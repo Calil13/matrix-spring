@@ -17,16 +17,12 @@ public class ApiController {
 
     @PostMapping("/generate-otp")
     public ResponseEntity<String> generateOtp(@RequestParam String email) {
-        String otp = otpService.generateOtp(email);
+        otpService.generateOtp(email);
         return ResponseEntity.ok("OTP has been sent to your email.");
     }
 
     @GetMapping("/customers")
     public ResponseEntity<?> getCustomers(@RequestHeader(value = "otp", required = false) String otpCode) {
-        if (otpCode == null || !otpService.isValidOtp(otpCode)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("Invalid or expired OTP");
-        }
-        return ResponseEntity.ok(customerService.getAllCustomers());
+        return ResponseEntity.ok(customerService.getAllCustomers(otpCode));
     }
 }
