@@ -16,6 +16,11 @@ public class UserController {
 
     private final MyUserService myUserService;
 
+    @GetMapping
+    public String test() {
+        return "USER authenticated successfully!";
+    }
+
     @GetMapping("/users/{username}")
     public UserDetails users(@PathVariable String username) {
         return myUserService.loadUserByUsername(username);
